@@ -1624,6 +1624,20 @@ public class Bot
     }
 
     /**
+     * 获取合并转发消息
+     * @param msgId - 消息ID
+     * @return result {@link ActionData} of {@link GetForwardMsgResp}
+     */
+    @Override
+    public ActionData<GetForwardMsgResp> getForwardMsg(String msgId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(ActionParams.MESSAGE_ID, msgId);
+        JsonObjectWrapper result = actionHandler.action(session, ActionPathEnum.GET_FORWARD_MSG, params);
+        return result != null ? JsonUtils.readValue(result.toJSONString(), new TypeReference<>() {
+        }) : null;
+    }
+
+    /**
      * 自定义请求
      *
      * @param action 请求路径
