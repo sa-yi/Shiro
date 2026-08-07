@@ -2,6 +2,7 @@ package com.mikuac.shiro.action;
 
 import com.mikuac.shiro.dto.action.common.ActionData;
 import com.mikuac.shiro.dto.action.common.ActionRaw;
+import com.mikuac.shiro.dto.action.response.GetForwardMsgResp;
 import com.mikuac.shiro.dto.action.response.GetMsgListResp;
 import com.mikuac.shiro.dto.action.response.SendQzoneResp;
 
@@ -47,6 +48,12 @@ public interface NapCatExtend {
      */
     ActionRaw setMsgEmojiLike(int msgId, String code, boolean isSet);
 
+    /**
+     * 获取合并转发消息，使用String类型的msgId
+     * @param msgId - 消息ID
+     * @return result {@link ActionData} of {@link GetForwardMsgResp}
+     */
+    ActionData<GetForwardMsgResp> getForwardMsg(String msgId);
 
     /**
      * 发表QQ空间说说
