@@ -1540,6 +1540,46 @@ public class Bot
         }) : null;
     }
 
+    /**
+     * 发表QQ空间说说
+     *
+     * @param content    说说正文
+     * @param richvals   每张图片对应的richval数组, 为空表示纯文字说说
+     * @param ugcRight   查看权限 1所有人可见 4好友可见 16部分好友可见 64仅自己可见 128部分好友不可见
+     * @param targetUins 权限作用QQ号数组, ugcRight为16/128时使用
+     * @return result {@link ActionData} of {@link SendQzoneResp}
+     */
+    @Override
+    public ActionData<SendQzoneResp> publishQzoneMsg(String content, List<String> richvals, int ugcRight,
+            List<Integer> targetUins) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(ActionParams.CONTENT, content);
+        if (richvals != null && !richvals.isEmpty()) {
+            params.put(ActionParams.IMAGES, richvals);
+        }
+        params.put(ActionParams.UGC_RIGHT, ugcRight);
+        if (targetUins != null && !targetUins.isEmpty()) {
+            params.put(ActionParams.TARGET_UINS, targetUins);
+        }
+        JsonObjectWrapper result = actionHandler.action(session, ActionPathEnum.SEND_QZONE_MSG, params);
+        return result != null ? JsonUtils.readValue(result.toJSONString(), new TypeReference<>() {
+        }) : null;
+    }
+
+    /**
+     * 删除QQ空间说说
+     *
+     * @param tid 说说Tid, 来自 publishQzoneMsg 的返回值
+     * @return result {@link ActionRaw}
+     */
+    @Override
+    public ActionRaw deleteQzoneMsg(String tid) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(ActionParams.TID, tid);
+        JsonObjectWrapper result = actionHandler.action(session, ActionPathEnum.DELETE_QZONE_MSG, params);
+        return result != null ? result.to(ActionRaw.class) : null;
+    }
+
     private ActionRaw doPoke(ActionPathEnum path, Consumer<Map<String, Object>> paramFiller) {
         Map<String, Object> params = new HashMap<>();
         paramFiller.accept(params);

@@ -59,6 +59,10 @@ public class ActionParams {
     public static final String SOURCE = "source";
     public static final String EMOJI_ID = "emoji_id";
     public static final String SET = "set";
+    public static final String IMAGES = "images";
+    public static final String UGC_RIGHT = "ugc_right";
+    public static final String TARGET_UINS = "target_uins";
+    public static final String TID = "tid";
 
     private ActionParams() {
     }
