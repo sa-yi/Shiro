@@ -3,6 +3,9 @@ package com.mikuac.shiro.action;
 import com.mikuac.shiro.dto.action.common.ActionData;
 import com.mikuac.shiro.dto.action.common.ActionRaw;
 import com.mikuac.shiro.dto.action.response.GetMsgListResp;
+import com.mikuac.shiro.dto.action.response.SendQzoneResp;
+
+import java.util.List;
 
 public interface NapCatExtend {
 
@@ -43,4 +46,22 @@ public interface NapCatExtend {
      * @return result {@link ActionRaw}
      */
     ActionRaw setMsgEmojiLike(int msgId, String code, boolean isSet);
+
+
+    /**
+     * 发表QQ空间说说
+     * @param content 说说正文
+     * @param richvals 每张图片对应的richval数组, 为空表示纯文字说说
+     * @param ugcRight 查看权限 1所有人可见 4好友可见 16部分好友可见 64仅自己可见 128部分好友不可见
+     * @param targetUins 权限作用QQ号数组, ugcRight为16/128时使用
+     * @return {@link ActionData} of {@link SendQzoneResp}
+     */
+    ActionData<SendQzoneResp> publishQzoneMsg(String content, List<String> richvals, int ugcRight, List<Integer> targetUins);
+
+    /**
+     * 删除QQ空间说说
+     * @param tid 说说Tid, 来自 publishQzoneMsg 的返回值
+     * @return result {@link ActionRaw}
+     */
+    ActionRaw deleteQzoneMsg(String tid);
 }

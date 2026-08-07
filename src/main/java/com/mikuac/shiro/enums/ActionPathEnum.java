@@ -310,7 +310,15 @@ public enum ActionPathEnum implements ActionPath {
     /**
      * 获取合并转发消息
      */
-    GET_FORWARD_MSG("get_forward_msg");
+    GET_FORWARD_MSG("get_forward_msg"),
+    /**
+     * 发表QQ空间说说
+     */
+    SEND_QZONE_MSG("send_qzone_msg"),
+    /**
+     * 删除QQ空间说说
+     */
+    DELETE_QZONE_MSG("delete_qzone_msg");
 
     /**
      * 请求路径
